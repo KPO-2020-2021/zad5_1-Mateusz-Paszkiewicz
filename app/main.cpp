@@ -21,6 +21,7 @@
 #include "rectangle.hh"
 #include "cuboid.hh"
 #include "prism.hh"
+#include "drone.hh"
 
 
 #define CUBOID_MODEL_FILE      "../datasets/bryly_wzorcowe/szescian.dat"
@@ -48,12 +49,14 @@ int main() {
 
   PzG::LaczeDoGNUPlota  Lacze;
 
-  Lacze.DodajNazwePliku("../datasets/bryly_wzorcowe/plaszczyzna.dat");
-  Lacze.DodajNazwePliku(ACTUAL_FILE__DRONE1_BODY);
-  Lacze.DodajNazwePliku(ACTUAL_FILE__DRONE1_ROTOR1);
-  Lacze.DodajNazwePliku(ACTUAL_FILE__DRONE1_ROTOR2);
-  Lacze.DodajNazwePliku(ACTUAL_FILE__DRONE1_ROTOR3);
-  Lacze.DodajNazwePliku(ACTUAL_FILE__DRONE1_ROTOR4);
+  Drone Drone1=Drone();
+  Drone1.Create(
+    WORK_FILE__DRONE1_BODY,
+    WORK_FILE__DRONE1_ROTOR1,
+    WORK_FILE__DRONE1_ROTOR2,
+    WORK_FILE__DRONE1_ROTOR3,
+    WORK_FILE__DRONE1_ROTOR4
+  );
 
   Lacze.ZmienTrybRys(PzG::TR_3D);
   Lacze.Inicjalizuj();  // Tutaj startuje gnuplot.
@@ -62,7 +65,9 @@ int main() {
   Lacze.UstawZakresY(0, 200);
   Lacze.UstawZakresZ(0, 120);
 
+  Lacze.Rysuj();
 
+  std::cin.ignore(10000,'\n');
 
 
   return 0;

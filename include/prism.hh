@@ -5,7 +5,8 @@
 class Prism{
 private:
   double point[12][3];
-
+  Vector3 Prism_Position;
+  
 public:
 
   Prism();

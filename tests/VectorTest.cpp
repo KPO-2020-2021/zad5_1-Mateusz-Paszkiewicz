@@ -11,8 +11,8 @@ TEST_CASE("Vector non-parametric constructor")
 {
   Vector<double, 2> vec=Vector<double, 2>();
 
-  CHECK(vec.size[0] == 0);
-  CHECK(vec.size[1] == 0);
+  CHECK(vec[0] == 0);
+  CHECK(vec[1] == 0);
 }
 
 TEST_CASE("<< for Vector class Test")
@@ -46,13 +46,13 @@ TEST_CASE("Vector addition and subtraction test")
 
   vec1=vec1-vec2;
 
-  CHECK(vec1.size[0] == 2);
-  CHECK(vec1.size[1] == 8);
+  CHECK(vec1[0] == 2);
+  CHECK(vec1[1] == 8);
 
   vec1=vec1+vec2;
 
-  CHECK(vec1.size[0] == 5);
-  CHECK(vec1.size[1] == 10);
+  CHECK(vec1[0] == 5);
+  CHECK(vec1[1] == 10);
 }
 
 TEST_CASE("Vector == operator test")

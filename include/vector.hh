@@ -14,9 +14,10 @@
 */
 template<typename T, unsigned int dime>
 class Vector {
-public:
+private:
+    T size[dime];
 
-    T size[dime];     //Tablica wektora
+public:
 
     Vector();
 

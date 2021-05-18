@@ -41,6 +41,7 @@ set(SOURCES          # All .cpp files in src/
     src/rectangle
     src/cuboid
     src/prism
+    src/drone
     src/handling
     src/lacze_do_gnuplota
 )

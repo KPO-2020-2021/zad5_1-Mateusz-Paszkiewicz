@@ -15,9 +15,10 @@
 //  3  *------------*  2
 
 class Rectangle {
+private:
+    double rect[4][2];
 
 public:
-    double rect[4][2];
 
     Rectangle();
 

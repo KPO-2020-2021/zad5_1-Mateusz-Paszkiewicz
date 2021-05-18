@@ -17,9 +17,10 @@
 */
 template<typename T, unsigned int dime>
 class Matrix {
-public:
-
+private:
     T value[dime][dime];
+
+public:
 
     Matrix();
 
