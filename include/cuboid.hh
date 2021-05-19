@@ -31,7 +31,7 @@
 class Cuboid{
 private:
   double point[8][3];
-  Vector3 Cuboid_Position;    
+  Vector3 Position;
 public:
 
   Cuboid();
@@ -48,4 +48,5 @@ public:
 
   Cuboid AngleTrans(double Angle, char axis);
 
+  friend class Drone;
 };

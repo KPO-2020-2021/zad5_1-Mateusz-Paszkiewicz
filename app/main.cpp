@@ -58,6 +58,8 @@ int main() {
     WORK_FILE__DRONE1_ROTOR4
   );
 
+  Lacze.DodajNazwePliku(ACTUAL_FILE__DRONE1_ROTOR1);
+
   Lacze.ZmienTrybRys(PzG::TR_3D);
   Lacze.Inicjalizuj();  // Tutaj startuje gnuplot.
 

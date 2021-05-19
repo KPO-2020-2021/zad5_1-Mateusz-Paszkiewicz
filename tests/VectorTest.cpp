@@ -66,3 +66,12 @@ TEST_CASE("Vector == operator test")
   CHECK(vec1 == vec2);
 
 }
+
+TEST_CASE("Vector Length member function test")
+{
+  double sample1[3]={2,2,1};
+  Vector3 vec1=Vector3(sample1);
+
+  CHECK(vec1.Length() == 3);
+
+}

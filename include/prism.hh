@@ -5,8 +5,8 @@
 class Prism{
 private:
   double point[12][3];
-  Vector3 Prism_Position;
-  
+  Vector3 Position;
+
 public:
 
   Prism();
@@ -23,6 +23,9 @@ public:
 
   Prism AngleTrans(double Angle, char axis);
 
+  Vector3 GetPosition();
+
+  friend class Drone;
 };
 
 std::ostream &operator<<(std::ostream &out, Prism &prism);

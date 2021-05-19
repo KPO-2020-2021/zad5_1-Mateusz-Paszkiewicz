@@ -2,6 +2,7 @@
 
 #include "size.hh"
 #include <iostream>
+#include <cmath>
 
 
 /*!
@@ -36,6 +37,8 @@ public:
     T &operator [] (unsigned int index);
 
     bool operator == (const Vector<T, dime> ) const;
+
+    double Length() const;
 
 };
 
@@ -168,6 +171,18 @@ const T &Vector<T, dime>::operator [] (unsigned int index) const {
 template<typename T, unsigned int dime>
 T &Vector<T, dime>::operator[] (unsigned int index) {
     return const_cast<T &>(const_cast<const Vector *>(this)->operator[](index));
+}
+
+template<typename T, unsigned int dime>
+double Vector<T, dime>::Length () const{
+  double length=0;
+
+  for(unsigned int i=0; i<dime; i++)
+    length+=(*this)[i]*(*this)[i];
+
+  length=sqrt(length);
+
+  return length;
 }
 
 /*!

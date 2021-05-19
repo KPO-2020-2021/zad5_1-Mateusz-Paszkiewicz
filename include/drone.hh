@@ -1,15 +1,16 @@
 #pragma once
 
+#include "lacze_do_gnuplota.hh"
 #include "handling.hh"
 #include "matrix.hh"
 #include "cuboid.hh"
 #include "prism.hh"
 
-/*          DRONE CLASS VISUALISATION (somewhat)
+/*          DRONE CLASS VISUALISATION (i tried xD)
 ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░▄▄▄▄░░░░░░░░░░░░░░░░░░░░
 ░░░░░░░░░░░░░░░░░░░░░░░░░░░█▀▀▀░░░░▀▄░░░░░░░░░░░░░░░░░░
 ░░Prism Rotor[2]░░░░░░░░▄█▀░░░░░░░░░░█░░░░░░░░░░░░░░░░░
-░░░█▀▀▀▀▀▀█▄░░░░░░░░░░░░░░░░░░░░░░░░░░░▄░░░Prism Rotor[1]
+░░░█▀▀▀▀▀▀█▄░░░░░░░░░░░░░░░░░░░░░░░░░░░▄░Prism Rotor[1]
 ░░▀░░░░░░░░░▀█░░░░░░░░░▐░░░░░░░░░░░░░░░░▌░░░░░░░░░░░░░░
 ░▌░░░░░░░░░░░░█░────────█░░░░░░░░░░░░░░░▌░░░░░░░░░░░░░░
 ░▌░░░░░░░░░░░░░█░░░░░░░░░█░░░░░░░░░░░░▄▄░░░░░░░░░░░░░░░
@@ -39,18 +40,26 @@
 
 
 
-class Drone : public Cuboid{
+class Drone : public Cuboid, public Prism{
 private:
   Cuboid Body;
   Prism Rotor[4];
-  Vector3 Drone_Position;
+  Vector3 DronePosition;
 
 public:
 
   Drone Create(const char* ,const char*,const char *,const char *,const char *);
 
-  Prism PrintRotor(int);
+  Prism &ReturnRotor(int);
 
-  Cuboid PrintBody();
+  Cuboid &ReturnBody();
+
+  Vector3 &ReturnBodyPosition();
+
+  Vector3 &ReturnRotorPosition(int);
+
+  /*bool ExecuteVerticalFlight(double, PzG::LaczeDoGNUPlota&);
+
+  bool ExecuteHorizontalFlight(double, PzG::LaczeDoGNUPlota&);*/
 
 };

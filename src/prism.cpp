@@ -125,3 +125,55 @@ std::ostream &operator<<(std::ostream &out, Prism &pri)
       }
       return out;
 }
+
+
+Prism Prism::AngleTrans(double Angle, char axis)
+{
+  if(axis=='z')
+    {
+      double TransX[][3]={{cos(Angle),-sin(Angle),0},{sin(Angle),cos(Angle),0},{0,0,1}};
+      Matrix3x3 TransMat=Matrix3x3(TransX);
+
+      (*this)=(*this)*TransMat;
+    }
+  else if(axis=='y')
+    {
+      double TransY[][3]={{cos(Angle),0,-sin(Angle)},{0,1,0},{sin(Angle),0,cos(Angle)}};
+      Matrix3x3 TransMat=Matrix3x3(TransY);
+
+      (*this)=(*this)*TransMat;
+    }
+  else if(axis=='x')
+  {
+    double TransZ[][3]={{1,0,0},{0,cos(Angle),-sin(Angle)},{0,sin(Angle),cos(Angle)}};
+    Matrix3x3 TransMat=Matrix3x3(TransZ);
+
+    (*this)=(*this)*TransMat;
+  }
+  else
+    {
+      std::cerr<<"Error! Wrong axis argument (Neither x, y or z)"<<std::endl;
+      return 0;
+    }
+
+
+
+  return (*this);
+
+}
+
+Vector3 Prism::GetPosition()
+{
+  double p0_arr[3]={(*this)(0,0),(*this)(0,1),(*this)(0,2)};  //points opposite to each other
+  double p7_arr[3]={(*this)(7,0),(*this)(7,1),(*this)(7,2)};
+
+  Vector3 p0_vec=Vector3(p0_arr);
+  Vector3 p7_vec=Vector3(p7_arr);
+
+  Vector3 temp=Vector3();
+
+  temp=p7_vec-p0_vec;
+  temp=temp/2;
+
+  return p0_vec+temp;
+}

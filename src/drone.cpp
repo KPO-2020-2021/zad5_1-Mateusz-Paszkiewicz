@@ -14,11 +14,26 @@ Drone Drone::Create(const char* File_Body,const char *File_Rotor1,const char *Fi
   return (*this);
 }
 
-Prism Drone::ReturnRotor(int RotorNum){
-  return this->Rotor[RotorNum]
+Prism &Drone::ReturnRotor(int RotorNum){ return this->Rotor[RotorNum]; }
+
+Cuboid &Drone::ReturnBody(){ return this->Body; }
+
+Vector3 &Drone::ReturnBodyPosition(){ return this->Body.Position; }
+
+Vector3 &Drone::ReturnRotorPosition(int RotorNum){ return this->Rotor[RotorNum].Position; }
+
+
+/*bool ExecuteVerticalFlight(double time, Lacze:PzG:LaczeDoGNUPlota&)
+{
+
+
+
+
+  return true;
 }
 
 
-Cuboid Drone::ReturnBody(){
-  return this->Body;
-}
+bool ExecuteHorizontalFlight(double time, Lacze:PzG:LaczeDoGNUPlota&)
+{
+  return true;
+}*/
