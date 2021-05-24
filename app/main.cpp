@@ -61,9 +61,7 @@ int main() {
 
   Lacze.UstawRotacjeXZ(64,65); // Tutaj ustawiany jest widok
 
-  Lacze.DodajNazwePliku("../datasets/dat_backup/PlikWlasciwy_Dron1_Korpus.dat");
-  Lacze.Rysuj();
-/*
+
   Lacze.DodajNazwePliku("../bryly_wzorcowe/plaszczyzna.dat");
   Lacze.DodajNazwePliku(WORK_FILE__DRONE1_BODY );
   Lacze.DodajNazwePliku(WORK_FILE__DRONE1_ROTOR1);
@@ -103,7 +101,7 @@ int main() {
     WORK_FILE__DRONE1_ROTOR3,
     WORK_FILE__DRONE1_ROTOR4
   );
-*/
+
   Lacze.Rysuj();
 
   std::cin.ignore(10000,'\n');

@@ -54,7 +54,7 @@ bool CoordsReadFromFile(const char *sNazwaPliku, Cuboid &Cub)
 
     fin.ignore(10000,'\n');
 
-    for(int i=0;i<4;i+=2){
+    for(int i=0;i<8;i+=2){
       for(int j=0;j<3;j++)
         fin >> Cub(i,j);
       for(int j=0;j<3;j++)
@@ -63,12 +63,8 @@ bool CoordsReadFromFile(const char *sNazwaPliku, Cuboid &Cub)
       fin.ignore(10000,'\n');
       fin.ignore(10000,'\n');
       fin.ignore(10000,'\n');
-      fin.ignore(10000,'\n');  
+      fin.ignore(10000,'\n');
     }
-
-
-
-
 
 
   fin.close();
@@ -90,6 +86,7 @@ bool CoordsReadFromFile(const char *sNazwaPliku, Cuboid &Cub)
  */
 void CoordsToStream( std::ostream& StrmWy, Rectangle &Rect)
 {
+
 
   StrmWy << std::setw(16) << std::fixed << std::setprecision(10) << Rect(0,0)
          << std::setw(16) << std::fixed << std::setprecision(10) << Rect(0,1) << std::endl;
@@ -117,41 +114,41 @@ void CoordsToStream( std::ostream& StrmWy, Rectangle &Rect)
  */
 void CoordsToStream( std::ostream& StrmWy, Cuboid &Cub)
 {
+  double HalfHeight[3]={(Cub(1,0)-Cub(0,0))/2, (Cub(1,1)-Cub(0,1))/2, (Cub(1,2)-Cub(0,2))/2};
+  Vector3 VecHalfHeight=Vector3(HalfHeight);
 
+  Vector3 UpperCenter=Cub.GetPosition()+VecHalfHeight;
+  Vector3 LowerCenter=Cub.GetPosition()-VecHalfHeight;
+
+
+for(int i=0;i<8;i+=2){
+  StrmWy << std::setw(16) << std::fixed << std::setprecision(10) << LowerCenter[0]
+         << std::setw(16) << std::fixed << std::setprecision(10) << LowerCenter[1]
+         << std::setw(16) << std::fixed << std::setprecision(10) << LowerCenter[2]<< std::endl;
+  StrmWy << std::setw(16) << std::fixed << std::setprecision(10) << Cub(i,0)
+         << std::setw(16) << std::fixed << std::setprecision(10) << Cub(i,1)
+         << std::setw(16) << std::fixed << std::setprecision(10) << Cub(i,2) << std::endl;
+  StrmWy << std::setw(16) << std::fixed << std::setprecision(10) << Cub(i+1,0)
+         << std::setw(16) << std::fixed << std::setprecision(10) << Cub(i+1,1)
+         << std::setw(16) << std::fixed << std::setprecision(10) << Cub(i+1,2) << std::endl;
+  StrmWy << std::setw(16) << std::fixed << std::setprecision(10) << UpperCenter[0]
+         << std::setw(16) << std::fixed << std::setprecision(10) << UpperCenter[1]
+         << std::setw(16) << std::fixed << std::setprecision(10) << UpperCenter[2]<< std::endl;
+         StrmWy<<std::endl;
+  }
+
+  StrmWy << std::setw(16) << std::fixed << std::setprecision(10) << LowerCenter[0]
+         << std::setw(16) << std::fixed << std::setprecision(10) << LowerCenter[1]
+         << std::setw(16) << std::fixed << std::setprecision(10) << LowerCenter[2]<< std::endl;
   StrmWy << std::setw(16) << std::fixed << std::setprecision(10) << Cub(0,0)
          << std::setw(16) << std::fixed << std::setprecision(10) << Cub(0,1)
          << std::setw(16) << std::fixed << std::setprecision(10) << Cub(0,2) << std::endl;
   StrmWy << std::setw(16) << std::fixed << std::setprecision(10) << Cub(1,0)
          << std::setw(16) << std::fixed << std::setprecision(10) << Cub(1,1)
          << std::setw(16) << std::fixed << std::setprecision(10) << Cub(1,2) << std::endl;
-        StrmWy<<std::endl;
-  StrmWy << std::setw(16) << std::fixed << std::setprecision(10) << Cub(2,0)
-         << std::setw(16) << std::fixed << std::setprecision(10) << Cub(2,1)
-         << std::setw(16) << std::fixed << std::setprecision(10) << Cub(2,2) << std::endl;
-  StrmWy << std::setw(16) << std::fixed << std::setprecision(10) << Cub(3,0)
-         << std::setw(16) << std::fixed << std::setprecision(10) << Cub(3,1)
-         << std::setw(16) << std::fixed << std::setprecision(10) << Cub(3,2) << std::endl;
-         StrmWy<<std::endl;
-  StrmWy << std::setw(16) << std::fixed << std::setprecision(10) << Cub(4,0)
-         << std::setw(16) << std::fixed << std::setprecision(10) << Cub(4,1)
-         << std::setw(16) << std::fixed << std::setprecision(10) << Cub(4,2) << std::endl;
-  StrmWy << std::setw(16) << std::fixed << std::setprecision(10) << Cub(5,0)
-         << std::setw(16) << std::fixed << std::setprecision(10) << Cub(5,1)
-         << std::setw(16) << std::fixed << std::setprecision(10) << Cub(5,2) << std::endl;
-         StrmWy<<std::endl;
-  StrmWy << std::setw(16) << std::fixed << std::setprecision(10) << Cub(6,0)
-         << std::setw(16) << std::fixed << std::setprecision(10) << Cub(6,1)
-         << std::setw(16) << std::fixed << std::setprecision(10) << Cub(6,2) << std::endl;
-  StrmWy << std::setw(16) << std::fixed << std::setprecision(10) << Cub(7,0)
-         << std::setw(16) << std::fixed << std::setprecision(10) << Cub(7,1)
-         << std::setw(16) << std::fixed << std::setprecision(10) << Cub(7,2) << std::endl;
-         StrmWy<<std::endl;
-  StrmWy << std::setw(16) << std::fixed << std::setprecision(10) << Cub(0,0)
-         << std::setw(16) << std::fixed << std::setprecision(10) << Cub(0,1)
-         << std::setw(16) << std::fixed << std::setprecision(10) << Cub(0,2) << std::endl;
-  StrmWy << std::setw(16) << std::fixed << std::setprecision(10) << Cub(1,0)
-         << std::setw(16) << std::fixed << std::setprecision(10) << Cub(1,1)
-         << std::setw(16) << std::fixed << std::setprecision(10) << Cub(1,2) << std::endl;
+  StrmWy << std::setw(16) << std::fixed << std::setprecision(10) << UpperCenter[0]
+         << std::setw(16) << std::fixed << std::setprecision(10) << UpperCenter[1]
+         << std::setw(16) << std::fixed << std::setprecision(10) << UpperCenter[2]<< std::endl;
          StrmWy<<std::endl;
                              // Jeszcze raz zapisujemy pierwsze dwa punkt,
                              // aby gnuplot narysowal zamkniętą figure.

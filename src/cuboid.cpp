@@ -158,3 +158,22 @@ Cuboid Cuboid::AngleTrans(double Angle, char axis)
   return (*this);
 
 }
+
+
+Vector3 Cuboid::GetPosition()
+{
+  double p0_arr[3]={(*this)(0,0),(*this)(0,1),(*this)(0,2)};  //points opposite to each other
+  double p7_arr[3]={(*this)(5,0),(*this)(5,1),(*this)(5,2)};
+
+  Vector3 p0_vec=Vector3(p0_arr);
+  Vector3 p7_vec=Vector3(p7_arr);
+
+  Vector3 temp=Vector3();
+
+  temp=p7_vec-p0_vec;
+  temp=temp/2;
+
+  (*this).Position=p0_vec+temp;
+
+  return (*this).Position;
+}

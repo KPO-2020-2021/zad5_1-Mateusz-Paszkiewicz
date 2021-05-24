@@ -87,9 +87,46 @@ TEST_CASE("Cuboid Class parametric Contructor Test")
 
 TEST_CASE("Read->Print->Read")
 {
-  Cuboid Test=Cuboid();
+  Cuboid test=Cuboid();
 
-  CoordsReadFromFile();
+  CoordsReadFromFile("../datasets/dat_backup/PlikWlasciwy_Dron1_Korpus.dat",test);
+
+  /*SaveCoordsToFile("../datasets/dat/CuboidTest.txt", Test);
+
+  CoordsReadFromFile("../datasets/dat/CuboidTest.txt",Test);*/
+
+  CHECK(test(0,0) == 149.293);
+  CHECK(test(0,1) == 143.636);
+  CHECK(test(0,2) == 4);
+
+  CHECK(test(1,0) == 143.636);
+  CHECK(test(1,1) == 149.293);
+  CHECK(test(1,2) == 4);
+
+  CHECK(test(2,0) == 156.364);
+  CHECK(test(2,1) == 150.707);
+  CHECK(test(2,2) == 4);
+
+  CHECK(test(3,0) == 150.707);
+  CHECK(test(3,1) == 156.364);
+  CHECK(test(3,2) == 4);
+
+  CHECK(test(4,0) == 156.364);
+  CHECK(test(4,1) == 150.707);
+  CHECK(test(4,2) == 0);
+
+  CHECK(test(5,0) == 150.707);
+  CHECK(test(5,1) == 156.364);
+  CHECK(test(5,2) == 0);
+
+  CHECK(test(6,0) == 149.293);
+  CHECK(test(6,1) == 143.636);
+  CHECK(test(6,2) == 0);
+
+  CHECK(test(7,0) == 143.636);
+  CHECK(test(7,1) == 149.293);
+  CHECK(test(7,2) == 0);
+
 
 
 }

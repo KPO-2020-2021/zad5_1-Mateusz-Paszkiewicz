@@ -175,5 +175,7 @@ Vector3 Prism::GetPosition()
   temp=p7_vec-p0_vec;
   temp=temp/2;
 
-  return p0_vec+temp;
+  (*this).Position=p0_vec+temp;
+
+  return (*this).Position;
 }
