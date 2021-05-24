@@ -5,6 +5,7 @@
 #include "../include/vector.hh"
 #include "../include/cuboid.hh"
 #include "../include/prism.hh"
+#include "../include/handling.hh"
 #include "../external/doctest/doctest/doctest.h"
 
 #include "RectangleTest.cpp"

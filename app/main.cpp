@@ -12,6 +12,8 @@
 #include <fstream>
 #include <string>
 #include <limits>
+#include <chrono>
+#include <thread>
 
 #include "lacze_do_gnuplota.hh"
 #include "exampleConfig.h"
@@ -49,6 +51,26 @@ int main() {
 
   PzG::LaczeDoGNUPlota  Lacze;
 
+  Lacze.ZmienTrybRys(PzG::TR_3D);
+  Lacze.Inicjalizuj();  // Tutaj startuje gnuplot.
+
+  Lacze.UstawZakresX(0, 200);
+  Lacze.UstawZakresY(0, 200);
+  Lacze.UstawZakresZ(0, 120);
+
+
+  Lacze.UstawRotacjeXZ(64,65); // Tutaj ustawiany jest widok
+
+  Lacze.DodajNazwePliku("../datasets/dat_backup/PlikWlasciwy_Dron1_Korpus.dat");
+  Lacze.Rysuj();
+/*
+  Lacze.DodajNazwePliku("../bryly_wzorcowe/plaszczyzna.dat");
+  Lacze.DodajNazwePliku(WORK_FILE__DRONE1_BODY );
+  Lacze.DodajNazwePliku(WORK_FILE__DRONE1_ROTOR1);
+  Lacze.DodajNazwePliku(WORK_FILE__DRONE1_ROTOR2);
+  Lacze.DodajNazwePliku(WORK_FILE__DRONE1_ROTOR3);
+  Lacze.DodajNazwePliku(WORK_FILE__DRONE1_ROTOR4);
+
   Drone Drone1=Drone();
   Drone1.Create(
     WORK_FILE__DRONE1_BODY,
@@ -58,8 +80,6 @@ int main() {
     WORK_FILE__DRONE1_ROTOR4
   );
 
-  Lacze.DodajNazwePliku(ACTUAL_FILE__DRONE1_ROTOR1);
-
   Lacze.ZmienTrybRys(PzG::TR_3D);
   Lacze.Inicjalizuj();  // Tutaj startuje gnuplot.
 
@@ -67,10 +87,26 @@ int main() {
   Lacze.UstawZakresY(0, 200);
   Lacze.UstawZakresZ(0, 120);
 
+  double arr[3]={0,0,10};
+  Vector3 Test=Vector3(arr);
+
+  Lacze.Rysuj();
+
+  std::this_thread::sleep_for(std::chrono::seconds(5));
+
+  Drone1.Displacement(Test);
+
+  Drone1.UpdateFiles(
+    WORK_FILE__DRONE1_BODY,
+    WORK_FILE__DRONE1_ROTOR1,
+    WORK_FILE__DRONE1_ROTOR2,
+    WORK_FILE__DRONE1_ROTOR3,
+    WORK_FILE__DRONE1_ROTOR4
+  );
+*/
   Lacze.Rysuj();
 
   std::cin.ignore(10000,'\n');
-
 
   return 0;
 }

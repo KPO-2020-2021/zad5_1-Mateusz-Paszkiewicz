@@ -44,19 +44,15 @@ class Drone : public Cuboid, public Prism{
 private:
   Cuboid Body;
   Prism Rotor[4];
-  Vector3 DronePosition;
+  Vector3 Position;
 
 public:
 
   Drone Create(const char* ,const char*,const char *,const char *,const char *);
 
-  Prism &ReturnRotor(int);
+  Drone Displacement(Vector3);
 
-  Cuboid &ReturnBody();
-
-  Vector3 &ReturnBodyPosition();
-
-  Vector3 &ReturnRotorPosition(int);
+  void UpdateFiles(const char* ,const char*,const char *,const char *,const char *);
 
   /*bool ExecuteVerticalFlight(double, PzG::LaczeDoGNUPlota&);
 

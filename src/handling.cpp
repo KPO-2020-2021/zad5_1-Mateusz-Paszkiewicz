@@ -52,14 +52,24 @@ bool CoordsReadFromFile(const char *sNazwaPliku, Cuboid &Cub)
     return false;
     }
 
-  fin >> Cub(0,0);   fin >> Cub(0,1);   fin >> Cub(0,2);
-  fin >> Cub(1,0);   fin >> Cub(1,1);   fin >> Cub(1,2);
-  fin >> Cub(2,0);   fin >> Cub(2,1);   fin >> Cub(2,2);
-  fin >> Cub(3,0);   fin >> Cub(3,1);   fin >> Cub(3,2);
-  fin >> Cub(4,0);   fin >> Cub(4,1);   fin >> Cub(4,2);
-  fin >> Cub(5,0);   fin >> Cub(5,1);   fin >> Cub(5,2);
-  fin >> Cub(6,0);   fin >> Cub(6,1);   fin >> Cub(6,2);
-  fin >> Cub(7,0);   fin >> Cub(7,1);   fin >> Cub(7,2);
+    fin.ignore(10000,'\n');
+
+    for(int i=0;i<4;i+=2){
+      for(int j=0;j<3;j++)
+        fin >> Cub(i,j);
+      for(int j=0;j<3;j++)
+        fin >> Cub(i+1,j);
+
+      fin.ignore(10000,'\n');
+      fin.ignore(10000,'\n');
+      fin.ignore(10000,'\n');
+      fin.ignore(10000,'\n');  
+    }
+
+
+
+
+
 
   fin.close();
   return true;
@@ -218,9 +228,18 @@ bool CoordsReadFromFile(const char *sNazwaPliku, Prism &Pri)
     return false;
     }
 
-for(int i=0;i<12;++i){
+fin.ignore(10000,'\n');
+
+for(int i=0;i<12;i+=2){
   for(int j=0;j<3;j++){
-    fin >> Pri(i,j);}}
+    fin >> Pri(i,j);}
+  for(int j=0;j<3;j++){
+    fin >> Pri(i+1,j);}
+  fin.ignore(10000,'\n');
+  fin.ignore(10000,'\n');
+  fin.ignore(10000,'\n');
+  fin.ignore(10000,'\n');
+}
 
 
   fin.close();
@@ -240,22 +259,43 @@ for(int i=0;i<12;++i){
 void CoordsToStream( std::ostream& StrmWy, Prism &Pri)
 {
 
+Vector3 UpperCenter=Vector3();
+Vector3 LowerCenter=Vector3();
+
+double HalfHeight[3]={(Pri(1,0)-Pri(0,0))/2, (Pri(1,1)-Pri(0,1))/2, (Pri(1,2)-Pri(0,2))/2};
+Vector3 VecHalfHeight=Vector3(HalfHeight);
+
+UpperCenter=Pri.GetPosition()+VecHalfHeight;
+LowerCenter=Pri.GetPosition()-VecHalfHeight;
+
 for(int i=0;i<12;i+=2){
+  StrmWy << std::setw(16) << std::fixed << std::setprecision(10) << LowerCenter[0]
+         << std::setw(16) << std::fixed << std::setprecision(10) << LowerCenter[1]
+         << std::setw(16) << std::fixed << std::setprecision(10) << LowerCenter[2]<< std::endl;
   StrmWy << std::setw(16) << std::fixed << std::setprecision(10) << Pri(i,0)
          << std::setw(16) << std::fixed << std::setprecision(10) << Pri(i,1)
          << std::setw(16) << std::fixed << std::setprecision(10) << Pri(i,2) << std::endl;
-  StrmWy << std::setw(16) << std::fixed << std::setprecision(10) << Pri(i,0)
-         << std::setw(16) << std::fixed << std::setprecision(10) << Pri(i,1)
-         << std::setw(16) << std::fixed << std::setprecision(10) << Pri(i,2) << std::endl;
-        StrmWy<<std::endl;
+  StrmWy << std::setw(16) << std::fixed << std::setprecision(10) << Pri(i+1,0)
+         << std::setw(16) << std::fixed << std::setprecision(10) << Pri(i+1,1)
+         << std::setw(16) << std::fixed << std::setprecision(10) << Pri(i+1,2) << std::endl;
+  StrmWy << std::setw(16) << std::fixed << std::setprecision(10) << UpperCenter[0]
+         << std::setw(16) << std::fixed << std::setprecision(10) << UpperCenter[1]
+         << std::setw(16) << std::fixed << std::setprecision(10) << UpperCenter[2]<< std::endl;
+         StrmWy<<std::endl;
       }
 
+  StrmWy << std::setw(16) << std::fixed << std::setprecision(10) << LowerCenter[0]
+         << std::setw(16) << std::fixed << std::setprecision(10) << LowerCenter[1]
+         << std::setw(16) << std::fixed << std::setprecision(10) << LowerCenter[2]<< std::endl;
   StrmWy << std::setw(16) << std::fixed << std::setprecision(10) << Pri(0,0)
          << std::setw(16) << std::fixed << std::setprecision(10) << Pri(0,1)
          << std::setw(16) << std::fixed << std::setprecision(10) << Pri(0,2) << std::endl;
   StrmWy << std::setw(16) << std::fixed << std::setprecision(10) << Pri(1,0)
          << std::setw(16) << std::fixed << std::setprecision(10) << Pri(1,1)
          << std::setw(16) << std::fixed << std::setprecision(10) << Pri(1,2) << std::endl;
+  StrmWy << std::setw(16) << std::fixed << std::setprecision(10) << UpperCenter[0]
+         << std::setw(16) << std::fixed << std::setprecision(10) << UpperCenter[1]
+         << std::setw(16) << std::fixed << std::setprecision(10) << UpperCenter[2]<< std::endl;
          StrmWy<<std::endl;
                              // Jeszcze raz zapisujemy pierwsze dwa punkt,
                              // aby gnuplot narysowal zamkniętą figure.

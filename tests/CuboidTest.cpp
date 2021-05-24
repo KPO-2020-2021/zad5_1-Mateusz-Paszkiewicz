@@ -83,3 +83,13 @@ TEST_CASE("Cuboid Class parametric Contructor Test")
 
 
 }
+
+
+TEST_CASE("Read->Print->Read")
+{
+  Cuboid Test=Cuboid();
+
+  CoordsReadFromFile();
+
+
+}

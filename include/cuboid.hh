@@ -4,15 +4,15 @@
 
 //    CUBOID OBJECT :
 //
-//    point[punkt][1]=x_punktu
-//    point[punkt][2]=y_punktu
-//    point[punkt][3]=z_punktu
+//    point[punkt][0]=x_punktu
+//    point[punkt][1]=y_punktu
+//    point[punkt][2]=z_punktu
 //
 //        *------------* 4
 //      / | 6        / |
-//    *------------* 5 |
-//    | 7 | 0      |   |
-//    |   *--------|---* 2
+//    *------------* 2 |
+//    | 1 | 0      |   |
+//    |   *--------|---* 3
 //    | / 1        | /
 //    *------------* 3
 //
@@ -47,6 +47,8 @@ public:
   double &operator () (unsigned int, unsigned int);
 
   Cuboid AngleTrans(double Angle, char axis);
+
+  Vector3 GetPosition();
 
   friend class Drone;
 };
