@@ -1,28 +1,28 @@
 #include "../include/drone.hh"
 
+#define TIME_UNIT 1 //in seconds
+#define MAX_HEIGHT 80
+#define VELOCITY 10   //Units per second
 
 
-Drone Drone::Create(const char* File_Body,const char *File_Rotor1,const char *File_Rotor2,const char *File_Rotor3,const char *File_Rotor4)
+Drone Drone::Create(const char* File_Names[7])
 {
-  CoordsReadFromFile(File_Body, this->Body);
-
-  CoordsReadFromFile(File_Rotor1, this->Rotor[0]);
-  CoordsReadFromFile(File_Rotor2, this->Rotor[1]);
-  CoordsReadFromFile(File_Rotor3, this->Rotor[2]);
-  CoordsReadFromFile(File_Rotor4, this->Rotor[3]);
+  CoordsReadFromFile(File_Names[0], this->Body);
+  CoordsReadFromFile(File_Names[1], this->Rotor[0]);
+  CoordsReadFromFile(File_Names[2], this->Rotor[1]);
+  CoordsReadFromFile(File_Names[3], this->Rotor[2]);
+  CoordsReadFromFile(File_Names[4], this->Rotor[3]);
 
   return (*this);
 }
 
-void Drone::UpdateFiles(const char* File_Body,const char *File_Rotor1,const char *File_Rotor2,const char *File_Rotor3,const char *File_Rotor4)
+void Drone::UpdateFiles()
 {
-  SaveCoordsToFile(File_Body, this->Body);
-
-  SaveCoordsToFile(File_Rotor1, this->Rotor[0]);
-  SaveCoordsToFile(File_Rotor2, this->Rotor[1]);
-  SaveCoordsToFile(File_Rotor3, this->Rotor[2]);
-  SaveCoordsToFile(File_Rotor4, this->Rotor[3]);
-
+  SaveCoordsToFile(this->File_Names[0],     this->Body);
+  SaveCoordsToFile(this->File_Names[1], this->Rotor[0]);
+  SaveCoordsToFile(this->File_Names[2], this->Rotor[1]);
+  SaveCoordsToFile(this->File_Names[3], this->Rotor[2]);
+  SaveCoordsToFile(this->File_Names[4], this->Rotor[3]);
 }
 
 
@@ -37,13 +37,48 @@ Drone Drone::Displacement(Vector3 Trans)
   return (*this);
 }
 
-
-/*bool ExecuteVerticalFlight(double time, Lacze:PzG:LaczeDoGNUPlota&)
+Vector3 Drone::PlanPath()
 {
-  return true;
+  Vector3 PathCoordsVecStart=Vector3();
+  Vector3 PathCoordsVecFinish=Vector3();
+
+  std::ifstream  fin;
+
+  fin.open(this->File_Names[6]);
+  if (!fin.is_open())  {
+    std::cerr << ":(  Operacja otwarcia do zapisu \"" << this->File_Names[6] << "\"" << std::endl
+   << ":(  nie powiodla sie." << std::endl;
+    return 0;
+    }
+
+ fin.ignore(1000,'\n');
+ fin.ignore(1000,'\n');
+
+ fin>>PathCoordsVecStart[0]; fin>>PathCoordsVecStart[1]; fin>>PathCoordsVecStart[2];
+ fin>>PathCoordsVecFinish[0]; fin>>PathCoordsVecFinish[1]; fin>>PathCoordsVecFinish[2];
+
+ fin.close();
+
+ return PathCoordsVecFinish-PathCoordsVecStart;
 }
 
-bool ExecuteHorizontalFlight(double time, Lacze:PzG:LaczeDoGNUPlota&)
+bool Drone::DrawAnimation(Vector3 PathVector, PzG::LaczeDoGNUPlota Lacze)
 {
-  return true;
-}*/
+  Vector3 StartingCoords=this->Body.GetPosition();
+  double VerticalTime   = MAX_HEIGHT / VELOCITY;
+
+  for(int timer=0; timer<VerticalTime || this->Body.GetPosition()==StartingCoords+PathVector ; timer+=TIME_UNIT)
+    {
+      this->Displacement(PathVector/VerticalTime);
+      this->UpdateFiles();
+
+      Lacze.Rysuj();
+
+      std::this_thread::sleep_for(std::chrono::seconds(TIME_UNIT));
+    }
+
+  if(this->Body.GetPosition()==StartingCoords+PathVector)
+    return true;
+  else
+    return false;
+}

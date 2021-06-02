@@ -45,7 +45,21 @@
 #define ROUTE_FILE "../datasets/dat/trasa_przelotu.dat"
 
 
+const char *WorkFileNames[7] = {      WORK_FILE__DRONE1_BODY,
+                                      WORK_FILE__DRONE1_ROTOR1,
+                                      WORK_FILE__DRONE1_ROTOR2,
+                                      WORK_FILE__DRONE1_ROTOR3,
+                                      WORK_FILE__DRONE1_ROTOR4,
+                                      ROUTE_FILE,
+                                      nullptr };
 
+const char *ActualFileNames[7] = {  ACTUAL_FILE__DRONE1_BODY
+                                    ACTUAL_FILE__DRONE1_ROTOR1
+                                    ACTUAL_FILE__DRONE1_ROTOR2
+                                    ACTUAL_FILE__DRONE1_ROTOR3
+                                    ACTUAL_FILE__DRONE1_ROTOR4
+                                    ROUTE_FILE,
+                                    nullptr };
 
 int main() {
 
@@ -54,55 +68,37 @@ int main() {
   Lacze.ZmienTrybRys(PzG::TR_3D);
   Lacze.Inicjalizuj();  // Tutaj startuje gnuplot.
 
-  Lacze.UstawZakresX(0, 200);
-  Lacze.UstawZakresY(0, 200);
-  Lacze.UstawZakresZ(0, 120);
-
-
   Lacze.UstawRotacjeXZ(64,65); // Tutaj ustawiany jest widok
 
 
+
   Lacze.DodajNazwePliku("../bryly_wzorcowe/plaszczyzna.dat");
-  Lacze.DodajNazwePliku(WORK_FILE__DRONE1_BODY );
+  Lacze.DodajNazwePliku(WORK_FILE__DRONE1_BODY);
   Lacze.DodajNazwePliku(WORK_FILE__DRONE1_ROTOR1);
   Lacze.DodajNazwePliku(WORK_FILE__DRONE1_ROTOR2);
   Lacze.DodajNazwePliku(WORK_FILE__DRONE1_ROTOR3);
   Lacze.DodajNazwePliku(WORK_FILE__DRONE1_ROTOR4);
 
-  Drone Drone1=Drone();
-  Drone1.Create(
-    WORK_FILE__DRONE1_BODY,
-    WORK_FILE__DRONE1_ROTOR1,
-    WORK_FILE__DRONE1_ROTOR2,
-    WORK_FILE__DRONE1_ROTOR3,
-    WORK_FILE__DRONE1_ROTOR4
-  );
-
   Lacze.ZmienTrybRys(PzG::TR_3D);
   Lacze.Inicjalizuj();  // Tutaj startuje gnuplot.
 
-  Lacze.UstawZakresX(0, 200);
-  Lacze.UstawZakresY(0, 200);
-  Lacze.UstawZakresZ(0, 120);
+  Lacze.UstawZakresX(0, 100);
+  Lacze.UstawZakresY(0, 100);
+  Lacze.UstawZakresZ(0, 90);
 
-  double arr[3]={0,0,10};
-  Vector3 Test=Vector3(arr);
 
-  Lacze.Rysuj();
+  Drone Drone1=Drone();
+  Drone1.Create(WorkFileNames);
 
-  std::this_thread::sleep_for(std::chrono::seconds(5));
+  double ascention[3]={0,0,80};
+  Vector3 AscentionVector=Vector3(ascention);
 
-  Drone1.Displacement(Test);
+  Vector3 PathVec=Drone1.PlanPath();
 
-  Drone1.UpdateFiles(
-    WORK_FILE__DRONE1_BODY,
-    WORK_FILE__DRONE1_ROTOR1,
-    WORK_FILE__DRONE1_ROTOR2,
-    WORK_FILE__DRONE1_ROTOR3,
-    WORK_FILE__DRONE1_ROTOR4
-  );
 
-  Lacze.Rysuj();
+  Drone1.DrawAnimation(AscentionVector, Lacze);
+  Drone1.DrawAnimation(PathVec, Lacze);
+
 
   std::cin.ignore(10000,'\n');
 

@@ -1,5 +1,9 @@
 #pragma once
 
+#include <chrono>
+#include <thread>
+#include <string>
+
 #include "lacze_do_gnuplota.hh"
 #include "handling.hh"
 #include "matrix.hh"
@@ -39,23 +43,25 @@
 */
 
 
-
 class Drone : public Cuboid, public Prism{
 private:
   Cuboid Body;
   Prism Rotor[4];
   Vector3 Position;
 
+  char *File_Names[6];
+
 public:
 
-  Drone Create(const char* ,const char*,const char *,const char *,const char *);
+  Drone Create( const char*[7]);                           // body
 
   Drone Displacement(Vector3);
 
-  void UpdateFiles(const char* ,const char*,const char *,const char *,const char *);
+  void UpdateFiles();
 
-  /*bool ExecuteVerticalFlight(double, PzG::LaczeDoGNUPlota&);
+  Vector3 PlanPath();
 
-  bool ExecuteHorizontalFlight(double, PzG::LaczeDoGNUPlota&);*/
+  bool DrawAnimation(Vector3, PzG::LaczeDoGNUPlota);
+
 
 };
