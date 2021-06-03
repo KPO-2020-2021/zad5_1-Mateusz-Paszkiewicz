@@ -6,6 +6,7 @@
 #include "../include/cuboid.hh"
 #include "../include/prism.hh"
 #include "../include/handling.hh"
+#include "../include/drone.hh"
 #include "../external/doctest/doctest/doctest.h"
 
 #include "RectangleTest.cpp"
@@ -13,3 +14,4 @@
 #include "MatrixTest.cpp"
 #include "CuboidTest.cpp"
 #include "PrismTest.cpp"
+#include "DroneTest.cpp"

@@ -2,7 +2,7 @@
 
 #include <chrono>
 #include <thread>
-#include <string>
+#include <unistd.h>
 
 #include "lacze_do_gnuplota.hh"
 #include "handling.hh"
@@ -55,13 +55,17 @@ public:
 
   Drone Create(const char*[7]);                           // body
 
+  Drone ChangeFiles(const char**);
+
   Drone Displacement(Vector3);
 
   void UpdateFiles();
 
   Vector3 PlanPath();
 
-  bool DrawAnimation(Vector3, PzG::LaczeDoGNUPlota);
+  bool DrawVerticalFlight(Vector3, PzG::LaczeDoGNUPlota);
+
+  bool DrawHorizontalFlight(Vector3, PzG::LaczeDoGNUPlota);
 
 
 };
