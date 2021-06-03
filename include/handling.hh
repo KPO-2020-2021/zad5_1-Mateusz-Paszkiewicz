@@ -22,8 +22,8 @@ bool SaveCoordsToFile( const char *,  Rectangle &);
 
 bool SaveCoordsToFile( const char *,  Cuboid &);
 
-bool CoordsReadFromFile(const char [], Prism &);
+bool CoordsReadFromFile(const char *, Prism &);
 
 void CoordsToStream(std::ostream&, Prism &);
 
-bool SaveCoordsToFile( const char [],  Prism &);
+bool SaveCoordsToFile( const char *,  Prism &);

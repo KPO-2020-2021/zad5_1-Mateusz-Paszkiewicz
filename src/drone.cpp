@@ -7,6 +7,14 @@
 
 Drone Drone::Create(const char* File_Names[7])
 {
+  this->File_Names[0]=const_cast <char *>(File_Names[0]);
+  this->File_Names[1]=const_cast <char *>(File_Names[1]);
+  this->File_Names[2]=const_cast <char *>(File_Names[2]);
+  this->File_Names[3]=const_cast <char *>(File_Names[3]);
+  this->File_Names[4]=const_cast <char *>(File_Names[4]);
+  this->File_Names[5]=const_cast <char *>(File_Names[5]);
+  this->File_Names[6]=const_cast <char *>(File_Names[6]);
+
   CoordsReadFromFile(File_Names[0], this->Body);
   CoordsReadFromFile(File_Names[1], this->Rotor[0]);
   CoordsReadFromFile(File_Names[2], this->Rotor[1]);
@@ -44,7 +52,13 @@ Vector3 Drone::PlanPath()
 
   std::ifstream  fin;
 
-  fin.open(this->File_Names[6]);
+  if(this->File_Names[5]==nullptr){
+    std::cout<<"No file name!"<<std::endl;
+    return 0;
+  }
+
+
+  fin.open(this->File_Names[5]);
   if (!fin.is_open())  {
     std::cerr << ":(  Operacja otwarcia do zapisu \"" << this->File_Names[6] << "\"" << std::endl
    << ":(  nie powiodla sie." << std::endl;

@@ -53,7 +53,7 @@ private:
 
 public:
 
-  Drone Create( const char*[7]);                           // body
+  Drone Create(const char*[7]);                           // body
 
   Drone Displacement(Vector3);
 

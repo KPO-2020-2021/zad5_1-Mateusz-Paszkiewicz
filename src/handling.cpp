@@ -10,7 +10,7 @@
  * \retval true - gdy operacja zapisu powiodła się,
  * \retval false - w przypadku przeciwnym.
  */
-bool CoordsReadFromFile(std::string  sNazwaPliku, Rectangle &Rect)
+bool CoordsReadFromFile(char *sNazwaPliku, Rectangle &Rect)
 {
     std::ifstream  fin;
 
@@ -41,7 +41,7 @@ bool CoordsReadFromFile(std::string  sNazwaPliku, Rectangle &Rect)
  * \retval true - gdy operacja zapisu powiodła się,
  * \retval false - w przypadku przeciwnym.
  */
-bool CoordsReadFromFile(std::string  sNazwaPliku, Cuboid &Cub)
+bool CoordsReadFromFile(const char * sNazwaPliku, Cuboid &Cub)
 {
     std::ifstream  fin;
 
@@ -162,7 +162,7 @@ for(int i=0;i<8;i+=2){
  * \retval true - gdy operacja zapisu powiodła się,
  * \retval false - w przypadku przeciwnym.
  */
-bool SaveCoordsToFile( std::string  sNazwaPliku,  Rectangle &Rect)
+bool SaveCoordsToFile(const char *sNazwaPliku,  Rectangle &Rect)
 {
   std::ofstream  StrmPlikowy;
 
@@ -187,7 +187,7 @@ bool SaveCoordsToFile( std::string  sNazwaPliku,  Rectangle &Rect)
  * \retval true - gdy operacja zapisu powiodła się,
  * \retval false - w przypadku przeciwnym.
  */
-bool SaveCoordsToFile( std::string  sNazwaPliku,  Cuboid &Cub)
+bool SaveCoordsToFile(const char * sNazwaPliku,  Cuboid &Cub)
 {
   std::ofstream  StrmPlikowy;
 
@@ -214,7 +214,7 @@ bool SaveCoordsToFile( std::string  sNazwaPliku,  Cuboid &Cub)
  * \retval true - gdy operacja zapisu powiodła się,
  * \retval false - w przypadku przeciwnym.
  */
-bool CoordsReadFromFile(std::string  sNazwaPliku, Prism &Pri)
+bool CoordsReadFromFile(const char *sNazwaPliku, Prism &Pri)
 {
     std::ifstream  fin;
 
@@ -307,7 +307,7 @@ for(int i=0;i<12;i+=2){
  * \retval true - gdy operacja zapisu powiodła się,
  * \retval false - w przypadku przeciwnym.
  */
-bool SaveCoordsToFile( std::string  sNazwaPliku,  Prism &Pri)
+bool SaveCoordsToFile(const char * sNazwaPliku,  Prism &Pri)
 {
   std::ofstream  StrmPlikowy;
 
