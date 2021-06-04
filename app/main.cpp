@@ -107,5 +107,6 @@ int main() {
   std::cin.ignore(10000,'\n');
   Drone1.DrawVerticalFlight(DescentVector, Lacze);
 
+
   return 0;
 }

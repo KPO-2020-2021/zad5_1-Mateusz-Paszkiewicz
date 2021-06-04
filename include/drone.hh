@@ -2,6 +2,7 @@
 
 #include <chrono>
 #include <thread>
+#include <cmath>
 #include <unistd.h>
 
 #include "lacze_do_gnuplota.hh"
@@ -51,6 +52,7 @@ private:
 
   char *File_Names[6];
 
+  bool Engine_On = false;
 public:
 
   Drone Create(const char*[7]);                           // body
@@ -62,6 +64,8 @@ public:
   void UpdateFiles();
 
   Vector3 PlanPath();
+
+  bool SpinRotors(double);
 
   bool DrawVerticalFlight(Vector3, PzG::LaczeDoGNUPlota);
 

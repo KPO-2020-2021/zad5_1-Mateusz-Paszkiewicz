@@ -17,6 +17,8 @@ public:
 
   Prism operator + (Vector3 &);
 
+  Prism operator - (Vector3 &);
+
   const double &operator () (unsigned int, unsigned int) const;
 
   double &operator () (unsigned int, unsigned int);

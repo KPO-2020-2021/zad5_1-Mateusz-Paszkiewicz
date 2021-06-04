@@ -73,14 +73,31 @@ Prism Prism::operator + (Vector3 &tmp)
       return (*this);
   }
 
-  /*!
-   * funktor () graniastoslupa
-  *
-  *\param[in] (*this) Prism of the coordinate to be extracted
-  *\param[in] pointNum - number of the wanted point
-  *\param[in] axis - axis of the wanted coordinate
-  *\retval const value of the coordinate of indicated values
-  */
+/*!
+* przeciazenie operatora odejmowania dla graniastoslupa i wektora
+*
+*\param[in] (*this) - LHS operand of subtraction
+*\param[in] tmp - RHS operand of subtraction
+*\retval result of addition of (*this) and tmp (of type prism)
+*/
+Prism Prism::operator - (Vector3 &tmp)
+  {
+    for(int i=0; i<12; i++) {
+      for(int j=0; j<3; j++) {
+          point[i][j]-=tmp[j];
+      }
+    }
+      return (*this);
+  }
+
+/*!
+ * funktor () graniastoslupa
+*
+*\param[in] (*this) Prism of the coordinate to be extracted
+*\param[in] pointNum - number of the wanted point
+*\param[in] axis - axis of the wanted coordinate
+*\retval const value of the coordinate of indicated values
+*/
 const double &Prism::operator () (unsigned int pointNum, unsigned int axis) const
 {
     if (axis >= 3) {

@@ -4,6 +4,7 @@
 #define TIME_UNIT_INT 10
 #define MAX_HEIGHT 80
 #define VELOCITY 20   //Units per second
+#define ROTATION_VELOCITY 10*M_PI/180
 
 
 Drone Drone::Create(const char* File_Names[7])
@@ -81,6 +82,30 @@ Vector3 Drone::PlanPath()
  return PathCoordsVecFinish-PathCoordsVecStart;
 }
 
+
+bool Drone::SpinRotors(double Angle)
+{
+  Vector3 CurrentRotorPosition[4];
+
+  for(int i=0; i<4; i++){
+      CurrentRotorPosition[i]=this->Rotor[i].GetPosition();
+    }
+
+  for(int i=0; i<4; i++){
+      this->Rotor[i]=this->Rotor[i]-CurrentRotorPosition[i];
+    }
+
+  for(int i=0; i<4; i++){
+      this->Rotor[i].AngleTrans(Angle,'z');
+    }
+
+  for(int i=0; i<4; i++){
+      this->Rotor[i]=this->Rotor[i]+CurrentRotorPosition[i];
+    }
+
+      return 1;
+}
+
 bool Drone::DrawVerticalFlight(Vector3 PathVector, PzG::LaczeDoGNUPlota Lacze)
 {
   Vector3 StartingCoords=this->Body.GetPosition();
@@ -89,6 +114,7 @@ bool Drone::DrawVerticalFlight(Vector3 PathVector, PzG::LaczeDoGNUPlota Lacze)
   for(double timer=0; timer<=VerticalTime  ; timer+=TIME_UNIT/1000)
     {
       this->Displacement(PathVector/VerticalTime*TIME_UNIT/1000);
+      this->SpinRotors(ROTATION_VELOCITY);
       this->UpdateFiles();
 
       Lacze.Rysuj();
@@ -112,6 +138,7 @@ bool Drone::DrawHorizontalFlight(Vector3 PathVector, PzG::LaczeDoGNUPlota Lacze)
   for(double timer=0; timer<=VerticalTime  ; timer+=TIME_UNIT/1000)
     {
       this->Displacement(PathVector/VerticalTime*TIME_UNIT/1000);
+      this->SpinRotors(ROTATION_VELOCITY);
       this->UpdateFiles();
 
       Lacze.Rysuj();
