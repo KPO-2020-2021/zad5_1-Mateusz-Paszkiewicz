@@ -51,8 +51,6 @@ private:
   Vector3 Position;
 
   char *File_Names[6];
-
-  bool Engine_On = false;
 public:
 
   Drone Create(const char*[7]);                           // body
@@ -66,6 +64,8 @@ public:
   Vector3 PlanPath();
 
   bool SpinRotors(double);
+
+  void Idle(PzG::LaczeDoGNUPlota);
 
   bool DrawVerticalFlight(Vector3, PzG::LaczeDoGNUPlota);
 

@@ -84,3 +84,5 @@ set_target_properties(
 
 # Set up tests (see tests/CMakeLists.txt).
 add_subdirectory(tests)
+
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -pthread -lpthread")

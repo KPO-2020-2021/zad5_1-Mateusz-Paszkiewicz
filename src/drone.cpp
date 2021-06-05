@@ -106,6 +106,18 @@ bool Drone::SpinRotors(double Angle)
       return 1;
 }
 
+void Drone::Idle(PzG::LaczeDoGNUPlota Lacze)
+{
+    while(true){
+      this->SpinRotors(ROTATION_VELOCITY);
+      this->UpdateFiles();
+
+      Lacze.Rysuj();
+
+      std::this_thread::sleep_for(std::chrono::milliseconds(TIME_UNIT_INT));
+    }
+}
+
 bool Drone::DrawVerticalFlight(Vector3 PathVector, PzG::LaczeDoGNUPlota Lacze)
 {
   Vector3 StartingCoords=this->Body.GetPosition();
