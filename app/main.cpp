@@ -9,6 +9,7 @@
 #include <iostream>
 #include <iomanip>
 #include <stdlib.h>
+#include <cstdlib>
 #include <fstream>
 #include <string>
 #include <limits>
@@ -100,11 +101,12 @@ int main() {
 
   Vector3 PathVec=Drone1.PlanPath();
 
-  std::cin.ignore(10000,'\n');
+  Drone1.DrawDroneRotation(90, Lacze);
+  getchar();
   Drone1.DrawVerticalFlight(AscensionVector, Lacze);
-  std::cin.ignore(10000,'\n');
+  Drone1.Idle(2, Lacze);
   Drone1.DrawHorizontalFlight(PathVec, Lacze);
-  std::cin.ignore(10000,'\n');
+  Drone1.Idle(2, Lacze);
   Drone1.DrawVerticalFlight(DescentVector, Lacze);
 
 

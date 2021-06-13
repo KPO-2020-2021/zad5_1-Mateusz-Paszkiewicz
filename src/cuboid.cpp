@@ -73,6 +73,16 @@ Cuboid Cuboid::operator + (Vector3 &tmp)
       return (*this);
   }
 
+Cuboid Cuboid::operator - (Vector3 &tmp)
+  {
+    for(int i=0; i<8; i++) {
+      for(int j=0; j<3; j++) {
+          point[i][j]-=tmp[j];
+      }
+    }
+      return (*this);
+  }
+
   /*!
    * funktor () prostopadloscianu
   *

@@ -65,7 +65,9 @@ public:
 
   bool SpinRotors(double);
 
-  void Idle(PzG::LaczeDoGNUPlota);
+  bool Idle(float, PzG::LaczeDoGNUPlota);
+
+  bool DrawDroneRotation(double, PzG::LaczeDoGNUPlota);
 
   bool DrawVerticalFlight(Vector3, PzG::LaczeDoGNUPlota);
 

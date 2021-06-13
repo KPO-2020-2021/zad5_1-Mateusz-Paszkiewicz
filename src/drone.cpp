@@ -1,10 +1,10 @@
 #include "../include/drone.hh"
 
-#define TIME_UNIT 10.00 //in seconds
+#define TIME_UNIT 10.00 //in miliseconds
 #define TIME_UNIT_INT 10
 #define MAX_HEIGHT 80
 #define VELOCITY 20   //Units per second
-#define ROTATION_VELOCITY 10*M_PI/180
+#define ROTATION_VELOCITY 25*M_PI/180
 
 
 Drone Drone::Create(const char* File_Names[7])
@@ -106,9 +106,10 @@ bool Drone::SpinRotors(double Angle)
       return 1;
 }
 
-void Drone::Idle(PzG::LaczeDoGNUPlota Lacze)
+bool Drone::Idle(float time,PzG::LaczeDoGNUPlota Lacze)
 {
-    while(true){
+    for(int timer=0;timer<TIME_UNIT*10*time; timer+=TIME_UNIT/1000)
+    {
       this->SpinRotors(ROTATION_VELOCITY);
       this->UpdateFiles();
 
@@ -116,6 +117,36 @@ void Drone::Idle(PzG::LaczeDoGNUPlota Lacze)
 
       std::this_thread::sleep_for(std::chrono::milliseconds(TIME_UNIT_INT));
     }
+
+    return 1;
+}
+
+
+bool Drone::DrawDroneRotation(double TotalAngle,PzG::LaczeDoGNUPlota Lacze)
+{
+    Vector3 BodyPosition=this->Body.GetPosition();
+
+    double RotationTime = TotalAngle*M_PI/180/(ROTATION_VELOCITY);
+
+    for(int timer=0; timer<=RotationTime*100; timer+=TIME_UNIT/10)
+    {
+      this->Body=this->Body-BodyPosition;
+      this->Body.AngleTrans(ROTATION_VELOCITY*TIME_UNIT/1000,'z');
+      this->Body=this->Body+BodyPosition;
+
+      for(int i=0; i<4; i++){
+        this->Rotor[i]=this->Rotor[i]-BodyPosition;
+        this->Rotor[i].AngleTrans(ROTATION_VELOCITY*TIME_UNIT/1000,'z');
+        this->Rotor[i]=this->Rotor[i]+BodyPosition;
+      }
+      this->UpdateFiles();
+
+      Lacze.Rysuj();
+
+      std::this_thread::sleep_for(std::chrono::milliseconds(TIME_UNIT_INT));
+    }
+
+    return 1;
 }
 
 bool Drone::DrawVerticalFlight(Vector3 PathVector, PzG::LaczeDoGNUPlota Lacze)
