@@ -146,23 +146,29 @@ std::ostream &operator<<(std::ostream &out, Prism &pri)
 
 Prism Prism::AngleTrans(double Angle, char axis)
 {
+  float sign=1;
+
+  if(Angle<0){
+     sign=-1;
+     Angle=2*M_PI-Angle;}
+
   if(axis=='z')
     {
-      double TransX[][3]={{cos(Angle),-sin(Angle),0},{sin(Angle),cos(Angle),0},{0,0,1}};
+      double TransX[][3]={{cos(Angle),-sin(Angle)*sign,0},{sin(Angle)*sign,cos(Angle),0},{0,0,1}};
       Matrix3x3 TransMat=Matrix3x3(TransX);
 
       (*this)=(*this)*TransMat;
     }
   else if(axis=='y')
     {
-      double TransY[][3]={{cos(Angle),0,-sin(Angle)},{0,1,0},{sin(Angle),0,cos(Angle)}};
+      double TransY[][3]={{cos(Angle),0,-sin(Angle)*sign},{0,1,0},{sin(Angle)*sign,0,cos(Angle)}};
       Matrix3x3 TransMat=Matrix3x3(TransY);
 
       (*this)=(*this)*TransMat;
     }
   else if(axis=='x')
   {
-    double TransZ[][3]={{1,0,0},{0,cos(Angle),-sin(Angle)},{0,sin(Angle),cos(Angle)}};
+    double TransZ[][3]={{1,0,0},{0,cos(Angle),-sin(Angle)*sign},{0,sin(Angle)*sign,cos(Angle)}};
     Matrix3x3 TransMat=Matrix3x3(TransZ);
 
     (*this)=(*this)*TransMat;

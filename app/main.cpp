@@ -101,8 +101,10 @@ int main() {
 
   Vector3 PathVec=Drone1.PlanPath();
 
-  Drone1.DrawDroneRotation(90, Lacze);
+  Drone1.DrawDroneRotation(-90, Lacze);
+  //Drone1.AdjustOrientation(Lacze);
   getchar();
+  Drone1.Idle(15, Lacze);
   Drone1.DrawVerticalFlight(AscensionVector, Lacze);
   Drone1.Idle(2, Lacze);
   Drone1.DrawHorizontalFlight(PathVec, Lacze);

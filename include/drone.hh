@@ -3,6 +3,7 @@
 #include <chrono>
 #include <thread>
 #include <cmath>
+#include <tgmath.h>
 #include <unistd.h>
 
 #include "lacze_do_gnuplota.hh"
@@ -49,6 +50,7 @@ private:
   Cuboid Body;
   Prism Rotor[4];
   Vector3 Position;
+  Vector3 Orientation;
 
   char *File_Names[6];
 public:
@@ -64,6 +66,10 @@ public:
   Vector3 PlanPath();
 
   bool SpinRotors(double);
+
+  Vector3 FindOrientation();
+
+  bool AdjustOrientation(PzG::LaczeDoGNUPlota);
 
   bool Idle(float, PzG::LaczeDoGNUPlota);
 

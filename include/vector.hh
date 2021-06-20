@@ -30,6 +30,8 @@ public:
 
     Vector operator * (const T &tmp);
 
+    T operator * (const Vector &tmp);
+
     Vector operator / (const T &tmp);
 
     const T &operator [] (unsigned int index) const;
@@ -124,6 +126,15 @@ Vector<T, dime> Vector<T, dime>::operator * (const T &tmp) {
     Vector<T, dime> result;
     for (unsigned int i = 0; i < dime; ++i) {
         result[i] = size[i] *= tmp;
+    }
+    return result;
+}
+
+template<typename T, unsigned int dime>
+T Vector<T, dime>::operator * (const Vector<T, dime> &tmp) {
+    T result;
+    for (unsigned int i = 0; i < dime; ++i) {
+        result+=this->size[i]*tmp[i];
     }
     return result;
 }

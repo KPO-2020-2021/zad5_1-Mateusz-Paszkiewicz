@@ -56,7 +56,7 @@ TEST_CASE("Prism Reading from file test")
 {
   Prism test=Prism();
 
-  CoordsReadFromFile("../datasets/dat/PlikWlasciwy_Dron1_Rotor1.dat",test);
+  CoordsReadFromFile("../datasets/dat_backup/PlikWlasciwy_Dron1_Rotor1.dat",test);
 
   CHECK(test(0,0) == 149.017);
   CHECK(test(0,1) == 159.989);
@@ -111,11 +111,11 @@ TEST_CASE("Read->Print->Read test")
 {
   Prism test=Prism();
 
-  CoordsReadFromFile("../datasets/dat/PlikWlasciwy_Dron1_Rotor1.dat",test);
+  CoordsReadFromFile("../datasets/dat_backup/PlikWlasciwy_Dron1_Rotor1.dat",test);
 
-  SaveCoordsToFile("../datasets/dat/PrismTest.txt", test);
+  SaveCoordsToFile("../datasets/dat_backup/PrismTest.txt", test);
 
-  CoordsReadFromFile("../datasets/dat/PrismTest.txt",test);
+  CoordsReadFromFile("../datasets/dat_backup/PrismTest.txt",test);
 
   CHECK(test(0,0) == 149.017);
   CHECK(test(0,1) == 159.989);
@@ -125,8 +125,8 @@ TEST_CASE("Read->Print->Read test")
   CHECK(test(1,1) == 159.989);
   CHECK(test(1,2) == 6);
 
-  CHECK(test(2,0) == 146.722);
-  CHECK(test(2,1) == 156.713);
+  CHECK(test(2,0) == 146.722);                                 //THIS TEST WAS STOPPED DUE TO
+  CHECK(test(2,1) == 156.713);                                 //ROOT PRISM FILE CONSTANTLY BEING CHANGED
   CHECK(test(2,2) == 4);
 
   CHECK(test(3,0) == 146.722);
