@@ -44,7 +44,15 @@
 ░░░░░░░░░░░░░└─┤░░░░░┌───────────┘░░░░░░░░░░░░░░░░░░░░░
 */
 
-
+/*!
+*\brief Klasa Dron Przedstawia zlozenie figur geometrycznych
+* przedstawiajacych drona
+*
+*
+* Klasa ta uzywa Cuboid jako korpus drona i 4xPrism jako
+* jego rotory
+*
+*/
 class Drone : public Cuboid, public Prism{
 private:
   Cuboid Body;
